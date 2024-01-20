@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: rng-app-svc
+spec:
+  selector:
+    app: rng-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+  type: NodePort
+
+
+# kubectl apply -f app-service.yaml 
