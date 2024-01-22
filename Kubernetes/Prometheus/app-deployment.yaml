@@ -1,53 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: backend
+  name: prometheus
+  labels:
+    app: prometheus
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: backend
+      app: prometheus
   template:
     metadata:
       labels:
-        app: backend
+        app: prometheus
     spec:
       containers:
-      - name: backend
-        image: kiarabici/fti:latest
-        imagePullPolicy: Always
-        securityContext:
-          allowPrivilegeEscalation: false
-          runAsUser: 10001
-          seccompProfile:
-            type: RuntimeDefault
-          runAsNonRoot: true
-          readOnlyRootFilesystem: true
-          capabilities:
-            drop:
-            - ALL
-        resources:
-          requests:
-            memory: "1024Mi"
-            cpu: "500m"
-          limits:
-            memory: "1024Mi"
-            cpu: "500m"
-        ports:
-        - containerPort: 8080
-        livenessProbe:
-          httpGet:
-            path: /
-            port: 8080
-          initialDelaySeconds: 60
-          failureThreshold: 3
-          periodSeconds: 60
-        readinessProbe:
-          httpGet:
-            path: /
-            port: 8080
-          initialDelaySeconds: 60
-          failureThreshold: 3
-          periodSeconds: 60
-
-# kubectl apply -f app-deployment.yaml 
+        - name: prometheus
+          image: prom/prometheus:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 9090
+# kubectl apply -f deployment_prometheus.yaml 
