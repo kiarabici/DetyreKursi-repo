@@ -20,4 +20,4 @@ spec:
           imagePullPolicy: Always
           ports:
             - containerPort: 9090
-# kubectl apply -f deployment_prometheus.yaml 
+# kubectl apply -f prometheus-deployment.yaml 

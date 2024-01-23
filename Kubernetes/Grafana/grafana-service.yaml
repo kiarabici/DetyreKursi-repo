@@ -24,4 +24,4 @@ spec:
       targetPort: 3000
   type: NodePort
   
-# kubectl apply -f service_grafana.yaml 
+# kubectl apply -f grafana-service.yaml 
